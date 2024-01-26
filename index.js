@@ -24,11 +24,16 @@ const port = process.env.PORT || 3000;
 
 
 // Connect to the MongoDB database
-console.log('MongoDB URI:', process.env.MONGO_URI);
-mongoose.connect(process.env.MONGO_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-});
+try {
+  // Connect to the MongoDB database
+   mongoose.connect(process.env.MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  });
+  console.log('MongoDB connection successful');
+} catch (error) {
+  console.error('MongoDB connection error:', error.message);
+}
 
 // Mongoose models
 const User = mongoose.model('User', {
